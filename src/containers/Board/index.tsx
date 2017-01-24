@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch  } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as block from 'bem-cn';
-import Cell from 'components/Cell';
+import CellsField from 'components/CellsField';
 import './style.styl';
 
 interface IStateProps {
@@ -39,15 +39,7 @@ class Board extends React.Component<Props, {}> {
         const { boardSize } = this.props;
         return (
             <div className={b()}>
-                {boardSize.map((line: number, lineIndex: number) => {
-                    return (
-                        <div className={b('line')}>
-                            {boardSize.map((cell: number, columnIndex: number) => {
-                                return <Cell row={lineIndex} column={columnIndex} />
-                            })}
-                        </div>
-                    )
-                })}
+                <CellsField boardSize={boardSize} />
             </div>
         );
     }
