@@ -1,18 +1,21 @@
-import { actionTypes } from '../actionTypes';
 import { Map, fromJS } from 'immutable';
 import initialState from '../initial';
+import { IReduxState, IAction } from '../../types/app';
 
-// const initialState = Immutable.fromJS({
-//     sizeAreaValues: {
-//         columns: 5,
-//         rows: 5,
-//     },
-//     cells: [],
-//     recursive: false,
-// });
+function reducer(state: IReduxState = initialState, action: IAction) {
+    const imState: Map<string, any> = fromJS(state);
+    switch (action.type) {
+    // case ('DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED'):
+    //     return imState
+    //         .setIn(['communications', 'fetching', 'isRequesting'], false)
+    //         .setIn(['communications', 'fetching', 'error'], '')
+    //         .setIn(['data', 'fields'], action.payload)
+    //         .toJS();
+    default:
+        return state;
 
-function chessReducer(state = initialState, action: any) {
-    return {}
+    }
+
 }
 
-export default chessReducer
+export default reducer;
