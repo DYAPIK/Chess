@@ -1,5 +1,6 @@
 interface IReduxState {
     boardSize: number[];
+    literals: string[],
 }
 
 interface IAction {

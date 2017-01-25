@@ -3,10 +3,13 @@ import { connect, Dispatch  } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as block from 'bem-cn';
 import CellsField from 'components/CellsField';
+import NumbersLine from 'components/NumbersLine';
+import LiteralsLine from 'components/LiteralsLine';
 import './style.styl';
 
 interface IStateProps {
-    boardSize: number[]
+    boardSize: number[];
+    literals: string[];
 }
 
 interface IOwnProps {}
@@ -16,8 +19,10 @@ type Props = IStateProps & IOwnProps & IDispatchProps;
 
 function mapStateToProps (state: any): IStateProps {
     const boardSize  = state.chess.boardSize;
+    const literals  = state.chess.literals;
     return {
-        boardSize
+        boardSize,
+        literals,
     };
 }
 
@@ -36,10 +41,14 @@ class Board extends React.Component<Props, {}> {
 
     render () {
         const b = this.b;
-        const { boardSize } = this.props;
+        const { boardSize, literals } = this.props;
         return (
             <div className={b()}>
+                <NumbersLine boardSize={boardSize} />
+                <div className="top-side"></div>
                 <CellsField boardSize={boardSize} />
+                <LiteralsLine literals={literals} />
+                <div className="right-side"></div>
             </div>
         );
     }
