@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import Cell from 'components/Cell';
+import Cell from 'components/BoardComponents/Cell';
 import './style.styl';
 
 interface IOwnProps {

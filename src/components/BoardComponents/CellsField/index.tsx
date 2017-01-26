@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import LineCells from 'components/LineCells';
+import LineCells from 'components/BoardComponents/LineCells';
 import './style.styl';
 
 interface IOwnProps {

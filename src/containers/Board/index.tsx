@@ -2,10 +2,10 @@ import * as React from 'react';
 import { connect, Dispatch  } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as block from 'bem-cn';
-import CellsField from 'components/CellsField';
-import NumbersLine from 'components/NumbersLine';
-import LiteralsLine from 'components/LiteralsLine';
+import CellsField from 'components/BoardComponents/CellsField';
+import Frame from 'components/BoardComponents/Frame';
 import './style.styl';
+
 
 interface IStateProps {
     boardSize: number[];
@@ -44,11 +44,9 @@ class Board extends React.Component<Props, {}> {
         const { boardSize, literals } = this.props;
         return (
             <div className={b()}>
-                <NumbersLine boardSize={boardSize} />
-                <div className="top-side"></div>
-                <CellsField boardSize={boardSize} />
-                <LiteralsLine literals={literals} />
-                <div className="right-side"></div>
+                <Frame boardSize={boardSize} literals={literals}>
+                    <CellsField boardSize={boardSize} />
+                </Frame>
             </div>
         );
     }
