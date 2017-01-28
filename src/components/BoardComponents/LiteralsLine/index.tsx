@@ -15,9 +15,9 @@ class LiteralsLine extends React.Component<IOwnProps, {}> {
         const { literals } = this.props;
         return (
             <div className={b()}>
-                {literals.map((item) => {
+                {literals.map((item, index) => {
                     return (
-                        <div className={b('literal')}>
+                        <div key={index} className={b('literal')}>
                             <div className={b('literal-value')}>{item}</div>
                         </div>
                     )

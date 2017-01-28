@@ -1,6 +1,30 @@
+import { ICell } from 'helpers/namespaces';
+
 interface IReduxState {
     boardSize: number[];
-    literals: string[],
+    literals: string[];
+    boardData: ICell[][];
+    typesFigures: IColorTypes;
+    queueGame: IQueue;
+}
+
+interface ITypesFigures {
+    pawn: string,
+    horse: string,
+    bishop: string,
+    rook: string,
+    officer: string,
+    queen: string,
+}
+
+interface IColorTypes {
+    white: ITypesFigures;
+    black: ITypesFigures;
+}
+
+interface IQueue {
+    white: boolean;
+    black: boolean;
 }
 
 interface IAction {
@@ -10,5 +34,8 @@ interface IAction {
 
 export {
     IReduxState,
-    IAction
+    IAction,
+    ITypesFigures,
+    IColorTypes,
+    IQueue,
 }

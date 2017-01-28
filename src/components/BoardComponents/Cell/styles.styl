@@ -9,5 +9,42 @@ $size = 50px
   background $white
   &_black
     background $black
+  &_active
+    background #c1c1c1
   &:hover
     cursor pointer
+
+.figure
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  &_black-horse
+    background-image: url("./images/blackFigures/horse.png")
+  &_black-bishop
+    background-image: url("./images/blackFigures/bishop.png")
+  &_black-queen
+    background-image: url("./images/blackFigures/queen.png")
+  &_black-pawn
+    background-image: url("./images/blackFigures/pawn.png")
+    background-size: 60%;
+  &_black-officer
+    background-image: url("./images/blackFigures/officer.png")
+  &_black-rook
+    background-size: 65%;
+    background-image: url("./images/blackFigures/rook.png")
+
+  &_white-horse
+    background-image: url("./images/whiteFigures/horse.png")
+  &_white-bishop
+    background-image: url("./images/whiteFigures/bishop.png")
+  &_white-queen
+    background-image: url("./images/whiteFigures/queen.png")
+  &_white-pawn
+    background-size: 60%;
+    background-image: url("./images/whiteFigures/pawn.png")
+  &_white-officer
+    background-image: url("./images/whiteFigures/officer.png")
+  &_white-rook
+    background-size: 65%;
+    background-image: url("./images/whiteFigures/rook.png")

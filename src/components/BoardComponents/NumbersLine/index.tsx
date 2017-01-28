@@ -15,10 +15,10 @@ class NumbersLine extends React.Component<IOwnProps, {}> {
         const { boardSize } = this.props;
         return (
             <div className={b()}>
-                {boardSize.reverse().map((item) => {
+                {boardSize.map((item, index) => {
                     return (
-                        <div className={b('number')}>
-                            <div className={b('number-value')}>{item + 1}</div>
+                        <div key={index} className={b('number')}>
+                            <div className={b('number-value')}>{boardSize.length - index}</div>
                         </div>
                     )
                 })}

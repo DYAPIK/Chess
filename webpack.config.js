@@ -61,7 +61,7 @@ module.exports = {
         ],
     },
 
-    devtool: IS_DEV ? 'source-map' : null,
+    // devtool: IS_DEV ? 'source-map' : null,
 
     plugins: [
         new HtmlWebpackPlugin({

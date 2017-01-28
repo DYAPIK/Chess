@@ -1,33 +1,45 @@
 import * as React from 'react';
 import { connect, Dispatch  } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import * as Redux from 'redux'
 import * as block from 'bem-cn';
 import CellsField from 'components/BoardComponents/CellsField';
 import Frame from 'components/BoardComponents/Frame';
+import { ICell } from 'helpers/namespaces';
+import { IColorTypes, IQueue } from 'types/app';
+import actions from 'localRedux/actions';
 import './style.styl';
 
 
 interface IStateProps {
-    boardSize: number[];
+    boardData: ICell[][];
     literals: string[];
+    boardSize: number[];
+    typesFigures: IColorTypes;
+    queueGame: IQueue;
 }
 
 interface IOwnProps {}
-interface IDispatchProps {}
+interface IDispatchProps {
+    chooseCell: typeof actions.chooseCell;
+}
 
 type Props = IStateProps & IOwnProps & IDispatchProps;
 
 function mapStateToProps (state: any): IStateProps {
-    const boardSize  = state.chess.boardSize;
-    const literals  = state.chess.literals;
+    const { boardData, boardSize, literals, typesFigures, queueGame }  = state.chess;
     return {
-        boardSize,
+        boardData,
         literals,
+        boardSize,
+        typesFigures,
+        queueGame,
     };
 }
 
-function mapDispatchToProps () {
-    return {}
+function mapDispatchToProps (dispatch: Redux.Dispatch<IDispatchProps>) {
+    return Redux.bindActionCreators({
+        ...actions,
+    }, dispatch)
 }
 
 class Board extends React.Component<Props, {}> {
@@ -41,11 +53,23 @@ class Board extends React.Component<Props, {}> {
 
     render () {
         const b = this.b;
-        const { boardSize, literals } = this.props;
+        const {
+            boardData,
+            literals,
+            boardSize,
+            typesFigures,
+            chooseCell,
+            queueGame,
+        } = this.props;
         return (
             <div className={b()}>
                 <Frame boardSize={boardSize} literals={literals}>
-                    <CellsField boardSize={boardSize} />
+                    <CellsField
+                        typesFigures={typesFigures}
+                        boardData={boardData}
+                        chooseCell={chooseCell}
+                        queueGame={queueGame}
+                    />
                 </Frame>
             </div>
         );

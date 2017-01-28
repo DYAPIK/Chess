@@ -1,11 +1,16 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import Cell from 'components/BoardComponents/Cell';
+import { ICell } from 'helpers/namespaces';
+import { IColorTypes, IQueue } from 'types/app';
+import actions from 'localRedux/actions';
 import './style.styl';
 
 interface IOwnProps {
-    boardSize: number[];
-    lineIndex: number;
+    lineCells: ICell[];
+    typesFigures: IColorTypes;
+    chooseCell: typeof actions.chooseCell;
+    queueGame: IQueue;
 }
 
 class LineCell extends React.Component<IOwnProps, {}> {
@@ -14,11 +19,19 @@ class LineCell extends React.Component<IOwnProps, {}> {
 
     render () {
         const b = this.b;
-        const { boardSize, lineIndex} = this.props;
+        const { lineCells, typesFigures, chooseCell, queueGame } = this.props;
         return (
             <div className={b()}>
-                {boardSize.map((cell: number, columnIndex: number) => {
-                    return <Cell key={columnIndex} row={lineIndex} column={columnIndex} />
+                {lineCells.map((cell: ICell, columnIndex: number) => {
+                    return (
+                        <Cell
+                            chooseCell={chooseCell}
+                            typesFigures={typesFigures}
+                            key={columnIndex}
+                            data={cell}
+                            queueGame={queueGame}
+                        />
+                    )
                 })}
             </div>
         );

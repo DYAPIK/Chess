@@ -49,27 +49,16 @@ function oneCycleOfLife () {
     }
 }
 
-function startGame () {
-    return (dispatch, getState) => {
-        dispatch({type: types.START_GAME, payload: true});
-        return dispatch(oneCycleOfLife());
-    };
-}
+
 
 function stopGame () {
     return {type: types.STOP_GAME, payload: false};
 }
 
-function resetGame () {
-    return dispatch => {
-        dispatch({type: types.STOP_GAME, payload: false});
-        return dispatch(initActions.generationCellData());
-    };
-}
 
 export default {
     oneCycleOfLife,
-    startGame,
+
     stopGame,
-    resetGame,
+
 }

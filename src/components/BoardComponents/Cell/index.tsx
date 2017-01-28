@@ -1,10 +1,16 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import './styles.styl';
+import { IColorTypes, IQueue } from 'types/app'
+import { ICell } from 'helpers/namespaces'
+import actions from 'localRedux/actions';
+
 
 interface IOwnProps {
-    row: number;
-    column: number;
+    data: ICell
+    typesFigures: IColorTypes;
+    chooseCell: typeof actions.chooseCell;
+    queueGame: IQueue;
 }
 
 class Cell extends React.Component<IOwnProps, {}> {
@@ -14,9 +20,11 @@ class Cell extends React.Component<IOwnProps, {}> {
     constructor (props: {}) {
         super(props);
         this.checkBlackCell = this.checkBlackCell.bind(this);
+        this.getClassNameFigure = this.getClassNameFigure.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
-    private checkBlackCell(row: number, column: number) {
+    private checkBlackCell(row: number, column: number): boolean {
         let isBlack = false;
         if (row % 2 === 0) {
             if (column % 2 !== 0) {
@@ -30,11 +38,57 @@ class Cell extends React.Component<IOwnProps, {}> {
         return isBlack
     }
 
+    private getClassNameFigure(): string {
+        const { typesFigures } = this.props;
+        const { id } = this.props.data;
+        switch (id) {
+        case (typesFigures.black.bishop):
+            return 'black-bishop';
+        case (typesFigures.black.pawn):
+            return 'black-pawn';
+        case (typesFigures.black.officer):
+            return 'black-officer';
+        case (typesFigures.black.rook):
+            return 'black-rook';
+        case (typesFigures.black.queen):
+            return 'black-queen';
+        case (typesFigures.black.horse):
+            return 'black-horse';
+
+        case (typesFigures.white.bishop):
+            return 'white-bishop';
+        case (typesFigures.white.pawn):
+            return 'white-pawn';
+        case (typesFigures.white.officer):
+            return 'white-officer';
+        case (typesFigures.white.rook):
+            return 'white-rook';
+        case (typesFigures.white.queen):
+            return 'white-queen';
+        case (typesFigures.white.horse):
+            return 'white-horse';
+
+        default:
+            return '';
+        }
+    }
+
+    private onClick(): void {
+        const { data: {x, y, id}, chooseCell, queueGame } = this.props;
+        if (id) {
+            chooseCell(x, y, queueGame, id);
+        }
+    }
+
     render () {
         const b = this.b;
-        const { row, column } = this.props;
+        const { x, y, active } = this.props.data;
         return (
-            <div className={b({black: this.checkBlackCell(row, column)})}></div>
+            <div onClick={this.onClick}
+                 className={b({black: this.checkBlackCell(y, x), active: active})
+                .mix(['figure', `figure_${this.getClassNameFigure()}`])}
+            >
+            </div>
         );
     }
 }
