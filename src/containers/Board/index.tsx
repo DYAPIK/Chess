@@ -5,7 +5,7 @@ import * as block from 'bem-cn';
 import CellsField from 'components/BoardComponents/CellsField';
 import Frame from 'components/BoardComponents/Frame';
 import { ICell } from 'helpers/namespaces';
-import { IColorTypes, IQueue } from 'types/app';
+import { IColorTypes, IQueue, IActiveCell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 
@@ -16,23 +16,26 @@ interface IStateProps {
     boardSize: number[];
     typesFigures: IColorTypes;
     queueGame: IQueue;
+    activeCell: IActiveCell;
 }
 
 interface IOwnProps {}
 interface IDispatchProps {
     chooseCell: typeof actions.chooseCell;
+    makeMove: typeof actions.makeMove;
 }
 
 type Props = IStateProps & IOwnProps & IDispatchProps;
 
 function mapStateToProps (state: any): IStateProps {
-    const { boardData, boardSize, literals, typesFigures, queueGame }  = state.chess;
+    const { boardData, boardSize, literals, typesFigures, queueGame, activeCell }  = state.chess;
     return {
         boardData,
         literals,
         boardSize,
         typesFigures,
         queueGame,
+        activeCell,
     };
 }
 
@@ -59,7 +62,9 @@ class Board extends React.Component<Props, {}> {
             boardSize,
             typesFigures,
             chooseCell,
+            makeMove,
             queueGame,
+            activeCell,
         } = this.props;
         return (
             <div className={b()}>
@@ -68,7 +73,9 @@ class Board extends React.Component<Props, {}> {
                         typesFigures={typesFigures}
                         boardData={boardData}
                         chooseCell={chooseCell}
+                        makeMove={makeMove}
                         queueGame={queueGame}
+                        activeCell={activeCell}
                     />
                 </Frame>
             </div>

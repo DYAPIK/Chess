@@ -1,4 +1,4 @@
-import { ICell } from 'helpers/namespaces';
+import { ICell, IFigure } from 'helpers/namespaces';
 
 interface IReduxState {
     boardSize: number[];
@@ -6,6 +6,13 @@ interface IReduxState {
     boardData: ICell[][];
     typesFigures: IColorTypes;
     queueGame: IQueue;
+    activeCell: IActiveCell | null;
+}
+
+interface IActiveCell {
+    x: number;
+    y: number;
+    figure: IFigure
 }
 
 interface ITypesFigures {
@@ -38,4 +45,5 @@ export {
     ITypesFigures,
     IColorTypes,
     IQueue,
+    IActiveCell,
 }

@@ -1,16 +1,20 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import './styles.styl';
-import { IColorTypes, IQueue } from 'types/app'
+import { IColorTypes, IQueue, IActiveCell } from 'types/app'
 import { ICell } from 'helpers/namespaces'
 import actions from 'localRedux/actions';
+import {makeMove} from "../../../localRedux/actions/chessActions";
 
 
 interface IOwnProps {
+    boardData: ICell[][];
     data: ICell
     typesFigures: IColorTypes;
     chooseCell: typeof actions.chooseCell;
+    makeMove: typeof actions.makeMove;
     queueGame: IQueue;
+    activeCell: IActiveCell;
 }
 
 class Cell extends React.Component<IOwnProps, {}> {
@@ -74,9 +78,15 @@ class Cell extends React.Component<IOwnProps, {}> {
     }
 
     private onClick(): void {
-        const { data: {x, y, id}, chooseCell, queueGame } = this.props;
+        const { data: {x, y, id, figure}, chooseCell, queueGame, activeCell, makeMove, boardData } = this.props;
         if (id) {
-            chooseCell(x, y, queueGame, id);
+            const args = { x, y, id, figure, queueGame };
+            chooseCell(args);
+        } else {
+            if (activeCell) {
+                const args = { activeCell, boardData, clickCellPosition: { x, y } };
+                makeMove(args);
+            }
         }
     }
 

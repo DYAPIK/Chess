@@ -26,7 +26,8 @@ const initialState: IReduxState = {
     queueGame: {
         white: true,
         black: false,
-    }
+    },
+    activeCell: null,
 };
 
 export default initialState;

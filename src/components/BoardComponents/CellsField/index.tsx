@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as block from 'bem-cn';
 import LineCells from 'components/BoardComponents/LineCells';
 import { ICell } from 'helpers/namespaces';
-import { IColorTypes, IQueue } from 'types/app';
+import { IColorTypes, IQueue, IActiveCell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 
@@ -10,7 +10,9 @@ interface IOwnProps {
     boardData: ICell[][];
     typesFigures: IColorTypes;
     chooseCell: typeof actions.chooseCell;
+    makeMove: typeof actions.makeMove;
     queueGame: IQueue;
+    activeCell: IActiveCell;
 }
 
 class CellsField extends React.Component<IOwnProps, {}> {
@@ -19,7 +21,7 @@ class CellsField extends React.Component<IOwnProps, {}> {
 
     render () {
         const b = this.b;
-        const { boardData, typesFigures, chooseCell, queueGame } = this.props;
+        const { boardData, typesFigures, chooseCell, queueGame, activeCell, makeMove } = this.props;
         return (
             <div className={b()}>
                 {boardData.map((lineCells: ICell[], lineIndex: number) => {
@@ -30,6 +32,9 @@ class CellsField extends React.Component<IOwnProps, {}> {
                             lineCells={lineCells}
                             chooseCell={chooseCell}
                             queueGame={queueGame}
+                            activeCell={activeCell}
+                            makeMove={makeMove}
+                            boardData={boardData}
                         />
                     )
                 })}
