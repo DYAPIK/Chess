@@ -5,7 +5,7 @@ import { Router, browserHistory } from 'react-router';
 import createRoutes from './routes';
 import createStore from './configureStore';
 
-const store = createStore();
+const { store } = createStore();
 const routes = createRoutes();
 const node = document.getElementById('root');
 const history = browserHistory;

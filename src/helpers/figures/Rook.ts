@@ -1,7 +1,7 @@
 import { ICell } from 'helpers/namespaces'
-import { Figure } from './Figure'
+import { LongDistanceFigures } from './LongDistanceFigures'
 
-class Rook extends Figure {
+class Rook extends LongDistanceFigures {
 
     public getPossibleSteps(gameData: ICell[][]): number[][] {
         const { x, y }    = this;
@@ -15,67 +15,61 @@ class Rook extends Figure {
             ...leftSteps,
             ...rightSteps
         ];
-        let possibleSteps: number[][] = [];
-        allPossibleSteps.forEach((step) => {
-            if (this.checkLimit(step) && this.checkEmptyCell(gameData, step[1], step[0])) {
-                possibleSteps.push(step)
-            }
-        });
-        return possibleSteps;
+        return this.filterSteps(allPossibleSteps, gameData);
 
     }
 
-    private generateLeftSideSteps(x: number, y: number, gameData: ICell[][]) {
-        let possibleSteps = [];
-        while (x > 0) {
-            x--;
-            if (this.checkLimit([y, x]) && this.checkEmptyCell(gameData, x, y)) {
-                possibleSteps.push([y, x]);
-            } else {
-                break
-            }
-        }
-        return possibleSteps;
-    }
-
-    private generateRightSideSteps(x: number, y: number, gameData: ICell[][]) {
-        let possibleSteps = [];
-        while (x < 7) {
-            x++;
-            if (this.checkLimit([y, x]) && this.checkEmptyCell(gameData, x, y)) {
-                possibleSteps.push([y, x]);
-            } else {
-                break
-            }
-        }
-        return possibleSteps;
-    }
-
-    private generateTopSideSteps(x: number, y: number, gameData: ICell[][]) {
-        let possibleSteps = [];
-        while (y > 0) {
-            y--;
-            if (this.checkLimit([y, x]) && this.checkEmptyCell(gameData, x, y)) {
-                possibleSteps.push([y, x]);
-            } else {
-                break
-            }
-        }
-        return possibleSteps;
-    }
-
-    private generateBottomSideSteps(x: number, y: number, gameData: ICell[][]) {
-        let possibleSteps = [];
-        while (y < 7) {
-            y++;
-            if (this.checkLimit([y, x]) && this.checkEmptyCell(gameData, x, y)) {
-                possibleSteps.push([y, x]);
-            } else {
-                break
-            }
-        }
-        return possibleSteps;
-    }
+    // private generateLeftSideSteps(x: number, y: number, gameData: ICell[][]) {
+    //     let possibleSteps = [];
+    //     while (x > 0) {
+    //         x--;
+    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
+    //             possibleSteps.push([y, x]);
+    //         } else {
+    //             break
+    //         }
+    //     }
+    //     return possibleSteps;
+    // }
+    //
+    // private generateRightSideSteps(x: number, y: number, gameData: ICell[][]) {
+    //     let possibleSteps = [];
+    //     while (x < 7) {
+    //         x++;
+    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
+    //             possibleSteps.push([y, x]);
+    //         } else {
+    //             break
+    //         }
+    //     }
+    //     return possibleSteps;
+    // }
+    //
+    // private generateTopSideSteps(x: number, y: number, gameData: ICell[][]) {
+    //     let possibleSteps = [];
+    //     while (y > 0) {
+    //         y--;
+    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
+    //             possibleSteps.push([y, x]);
+    //         } else {
+    //             break
+    //         }
+    //     }
+    //     return possibleSteps;
+    // }
+    //
+    // private generateBottomSideSteps(x: number, y: number, gameData: ICell[][]) {
+    //     let possibleSteps = [];
+    //     while (y < 7) {
+    //         y++;
+    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
+    //             possibleSteps.push([y, x]);
+    //         } else {
+    //             break
+    //         }
+    //     }
+    //     return possibleSteps;
+    // }
 }
 
 export {

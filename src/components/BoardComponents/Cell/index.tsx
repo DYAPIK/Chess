@@ -79,12 +79,18 @@ class Cell extends React.Component<IOwnProps, {}> {
 
     private onClick(): void {
         const { data: {x, y, id, figure}, chooseCell, queueGame, activeCell, makeMove, boardData } = this.props;
+        // if cell have figure
         if (id) {
-            const args = { x, y, id, figure, queueGame };
+            const args = { x, y, id, figure, queueGame, boardData };
             chooseCell(args);
+            // cell have figure, condition if this cell has enemy figure
+            if (activeCell && activeCell.x !== x && activeCell.y !== y) {
+                const args = { activeCell, boardData, clickCellPosition: { x, y }, attack: true };
+                makeMove(args);
+            }
         } else {
-            if (activeCell) {
-                const args = { activeCell, boardData, clickCellPosition: { x, y } };
+            if (activeCell && Object.keys(activeCell).length) {
+                const args = { activeCell, boardData, clickCellPosition: { x, y }, attack: false };
                 makeMove(args);
             }
         }

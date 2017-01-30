@@ -15,14 +15,7 @@ class Horse extends Figure {
             [y + 1, x - 2],
             [y - 1, x - 2],
         ];
-        let possibleSteps: number[][] = [];
-
-        allPossibleSteps.forEach((step) => {
-            if (this.checkLimit(step) && this.checkEmptyCell(gameData, step[1], step[0])) {
-                possibleSteps.push(step)
-            }
-        });
-        return possibleSteps;
+        return this.filterSteps(allPossibleSteps, gameData);
     }
 }
 

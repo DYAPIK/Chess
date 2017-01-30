@@ -11,7 +11,7 @@ import {
 interface ICell {
     x: number;
     y: number;
-    id: string | null;
+    id: string | '';
     active: boolean;
     figure: BlackPawn | Queen | Rook | Officer | Horse | Bishop | WhitePawn | null;
 }
