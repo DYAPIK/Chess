@@ -84,7 +84,7 @@ class Cell extends React.Component<IOwnProps, {}> {
             const args = { x, y, id, figure, queueGame, boardData };
             chooseCell(args);
             // cell have figure, condition if this cell has enemy figure
-            if (activeCell && activeCell.x !== x && activeCell.y !== y) {
+            if (activeCell && (activeCell.x !== x || activeCell.y !== y)) {
                 const args = { activeCell, boardData, clickCellPosition: { x, y }, attack: true };
                 makeMove(args);
             }

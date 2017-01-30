@@ -17,63 +17,6 @@ class Bishop extends LongDistanceFigures {
         ];
         return this.filterSteps(allPossibleSteps, gameData)
     }
-
-    // private generateTopRightSteps(x: number, y: number, gameData: ICell[][]): number[][]     {
-    //     let possibleSteps = [];
-    //     while (x < 7) {
-    //         y--;
-    //         x++;
-    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
-    //             possibleSteps.push([y, x]);
-    //         } else {
-    //             break
-    //         }
-    //     }
-    //     return possibleSteps;
-    // }
-    //
-    // private generateBottomRightSteps(x: number, y: number, gameData: ICell[][]): number[][] {
-    //     let possibleSteps = [];
-    //     while (x < 7) {
-    //         y++;
-    //         x++;
-    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
-    //             possibleSteps.push([y, x]);
-    //         } else {
-    //             break
-    //         }
-    //     }
-    //     return possibleSteps;
-    // }
-    //
-    // private generateBottomLeftSteps(x: number, y: number, gameData: ICell[][]): number[][] {
-    //     let possibleSteps = [];
-    //     while (x > 0) {
-    //         y++;
-    //         x--;
-    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
-    //             possibleSteps.push([y, x]);
-    //         } else {
-    //             break
-    //         }
-    //     }
-    //     return possibleSteps;
-    // }
-    //
-    // private generateTopLeftSteps(x: number, y: number, gameData: ICell[][]): number[][] {
-    //     let possibleSteps = [];
-    //     while (x > 0) {
-    //         y--;
-    //         x--;
-    //         if (this.checkLimit([y,x]) && (this.checkEnemyFigure(gameData, x, y) || this.checkEmptyCell(gameData, x, y))) {
-    //             possibleSteps.push([y, x]);
-    //         } else {
-    //             break
-    //         }
-    //     }
-    //     return possibleSteps;
-    // }
-
 }
 
 export {

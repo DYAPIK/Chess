@@ -9,7 +9,7 @@ import  {
     WhitePawn
 } from './figures'
 
-function createInitalChessData(): ICell[][] {
+function createInitialChessData(): ICell[][] {
     let data = [];
     for (let i = 0; i < 8; i++) {
         let lineCells = [];
@@ -103,7 +103,7 @@ function findPossibleSteps(possibleSteps: number[][], searchStep: {x: number, y:
 }
 
 export {
-    createInitalChessData,
+    createInitialChessData,
     findActiveCell,
     findPossibleSteps,
 }
