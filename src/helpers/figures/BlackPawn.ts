@@ -9,7 +9,7 @@ class BlackPawn extends Figure {
         const newY = y + 1;
         if (this.checkEmptyCell(gameData, x, newY)) {
             possibleSteps.push([newY, x])
-        }
+         }
         if (y === 1) {
             const newY = y + 2;
             if (this.checkEmptyCell(gameData, x, newY)) {

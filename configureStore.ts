@@ -34,14 +34,6 @@ function configureStore (): IStoreData {
     return {
         store,
     };
-
-    // return createStore(
-    //     reducer,
-    //     compose(
-    //       applyMiddleware(...middlewares),
-    //       ('development' === process.env.NODE_ENV && window.devToolsExtension) ? window.devToolsExtension() : (arg: any) => arg
-    //     ),
-    // );
 }
 
 export default configureStore;
