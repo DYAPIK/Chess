@@ -1,4 +1,4 @@
-import { ICell } from 'helpers/namespaces'
+import { ICell } from 'types/app'
 import { LongDistanceFigures } from './LongDistanceFigures'
 
 class Officer extends LongDistanceFigures {

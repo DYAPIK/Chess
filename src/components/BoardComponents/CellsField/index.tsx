@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import LineCells from 'components/BoardComponents/LineCells';
-import { ICell } from 'helpers/namespaces';
-import { IColorTypes, IQueue, IActiveCell } from 'types/app';
+import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 

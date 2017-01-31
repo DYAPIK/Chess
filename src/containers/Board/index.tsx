@@ -4,8 +4,7 @@ import * as Redux from 'redux'
 import * as block from 'bem-cn';
 import CellsField from 'components/BoardComponents/CellsField';
 import Frame from 'components/BoardComponents/Frame';
-import { ICell } from 'helpers/namespaces';
-import { IColorTypes, IQueue, IActiveCell } from 'types/app';
+import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 
@@ -19,13 +18,12 @@ interface IStateProps {
     activeCell: IActiveCell;
 }
 
-interface IOwnProps {}
 interface IDispatchProps {
     chooseCell: typeof actions.chooseCell;
     makeMove: typeof actions.makeMove;
 }
 
-type Props = IStateProps & IOwnProps & IDispatchProps;
+type Props = IStateProps & IDispatchProps;
 
 function mapStateToProps (state: any): IStateProps {
     const { boardData, boardSize, literals, typesFigures, queueGame, activeCell }  = state.chess;

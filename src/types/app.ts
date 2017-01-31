@@ -1,5 +1,3 @@
-import { ICell, IFigure } from 'helpers/namespaces';
-
 interface IReduxState {
     boardSize: number[];
     literals: string[];
@@ -12,7 +10,7 @@ interface IReduxState {
 interface IActiveCell {
     x: number;
     y: number;
-    figure: IFigure
+    id: string;
 }
 
 interface ITypesFigures {
@@ -34,6 +32,13 @@ interface IQueue {
     black: boolean;
 }
 
+interface ICell {
+    x: number;
+    y: number;
+    id: string | '';
+    active?: boolean;
+}
+
 interface IAction {
     payload?: { [key: string]: any } | number | string | null;
     type: string;
@@ -46,4 +51,5 @@ export {
     IColorTypes,
     IQueue,
     IActiveCell,
+    ICell,
 }

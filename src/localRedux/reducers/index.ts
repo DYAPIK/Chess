@@ -1,42 +1,36 @@
 import { Map, fromJS } from 'immutable';
 import initialState from '../initial';
-import { IReduxState, IAction } from '../../types/app';
-import { IFigure } from 'helpers/namespaces'
+import { IReduxState, IAction, ICell } from 'types/app';
 
 
 function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
     const imState: Map<string, any> = fromJS(state);
     switch (action.type) {
     case ('CHESS:CHOOSE_CELL'): {
-        interface IData { x: number, y: number; figure: IFigure, activeCell: { x: number; y:number; } }
+        interface IData { x: number, y: number; id: string, activeCell: { x: number; y:number; } }
         const payload = action.payload as IData;
         return imState
             .setIn(['boardData', payload.y, payload.x, 'active'], true)
-            .set('activeCell', {x: payload.x, y: payload.y, figure: payload.figure})
+            .set('activeCell', {x: payload.x, y: payload.y, id: payload.id})
             .toJS();
     }
     case ('CHESS:CHANGE_ACTIVE_CELL'): {
-        interface IData { x: number, y: number; figure: IFigure, activeCell: { x: number; y:number; } }
-        const { x, y, activeCell, figure } = action.payload as IData;
+        interface IData { x: number, y: number; id: string, activeCell: { x: number; y:number; } }
+        const { x, y, activeCell, id } = action.payload as IData;
         return imState
             .setIn(['boardData', y, x, 'active'], true)
             .setIn(['boardData', activeCell.y, activeCell.x, 'active'], false)
-            .set('activeCell', { x, y, figure })
+            .set('activeCell', { x, y, id })
             .toJS();
     }
     case ('CHESS:MAKE_MOVE'): {
         interface IData {
-            clickCellPosition: { x: number, y: number };
-            figure: IFigure;
-            activeCell: { x: number, y: number, figure: IFigure }
+            clickCellPosition: ICell;
+            activeCell: ICell
         }
-        const {  clickCellPosition, figure, activeCell  }  = action.payload as IData;
-        figure.x = clickCellPosition.x;
-        figure.y = clickCellPosition.y;
+        const {  clickCellPosition, activeCell  }  = action.payload as IData;
         return imState
-            .setIn(['boardData', clickCellPosition.y, clickCellPosition.x, 'id'], figure.id)
-            .setIn(['boardData', clickCellPosition.y, clickCellPosition.x, 'figure'], figure)
-            .setIn(['boardData', activeCell.y, activeCell.x, 'figure'], null)
+            .setIn(['boardData', clickCellPosition.y, clickCellPosition.x, 'id'], activeCell.id)
             .setIn(['boardData', activeCell.y, activeCell.x, 'id'], '')
             .setIn(['boardData', activeCell.y, activeCell.x, 'active'], false)
             .set('activeCell', null)
@@ -52,7 +46,6 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
     default:
         return state;
     }
-
 }
 
 export default reducer;

@@ -1,18 +1,15 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import './styles.styl';
-import { IColorTypes, IQueue, IActiveCell } from 'types/app'
-import { ICell } from 'helpers/namespaces'
+import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app'
 import actions from 'localRedux/actions';
-import {makeMove} from "../../../localRedux/actions/chessActions";
-
 
 interface IOwnProps {
+    chooseCell: typeof actions.chooseCell;
+    makeMove: typeof actions.makeMove;
     boardData: ICell[][];
     data: ICell
     typesFigures: IColorTypes;
-    chooseCell: typeof actions.chooseCell;
-    makeMove: typeof actions.makeMove;
     queueGame: IQueue;
     activeCell: IActiveCell;
 }
@@ -78,19 +75,19 @@ class Cell extends React.Component<IOwnProps, {}> {
     }
 
     private onClick(): void {
-        const { data: {x, y, id, figure}, chooseCell, queueGame, activeCell, makeMove, boardData } = this.props;
+        const { data: {x, y, id}, chooseCell, queueGame, activeCell, makeMove, boardData, typesFigures } = this.props;
         // if cell have figure
         if (id) {
-            const args = { x, y, id, figure, queueGame, boardData };
+            const args = { x, y, id, queueGame, boardData };
             chooseCell(args);
             // cell have figure, condition if this cell has enemy figure
             if (activeCell && (activeCell.x !== x || activeCell.y !== y)) {
-                const args = { activeCell, boardData, clickCellPosition: { x, y }, attack: true };
+                const args = { typesFigures, activeCell, boardData, clickCellPosition: { x, y, id }, attack: true };
                 makeMove(args);
             }
         } else {
             if (activeCell && Object.keys(activeCell).length) {
-                const args = { activeCell, boardData, clickCellPosition: { x, y }, attack: false };
+                const args = { typesFigures, activeCell, boardData, clickCellPosition: { x, y, id }, attack: false };
                 makeMove(args);
             }
         }

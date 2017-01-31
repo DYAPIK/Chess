@@ -1,5 +1,5 @@
 import { Figure } from './Figure';
-import { ICell } from 'helpers/namespaces'
+import { ICell } from 'types/app'
 
 class LongDistanceFigures extends Figure {
 
