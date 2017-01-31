@@ -23,10 +23,10 @@ class WhitePawn extends Figure {
     private getAttackPosition(gameData: ICell[][]): number[][] {
         let possibleSteps = [];
         const { x, y } = this;
-        if (this.checkLimit([y - 1, x + 1]) && this.checkEnemyFigure(gameData, x + 1, y - 1)) {
+        if (this.checkLimit([y - 1, x + 1]) && this.checkEnemyFigure(gameData, x + 1, y - 1)  && !this.checkEmptyCell(gameData, x + 1, y - 1)) {
             possibleSteps.push([y - 1, x + 1]);
         }
-        if (this.checkLimit([y - 1, x - 1]) && this.checkEnemyFigure(gameData, x - 1, y - 1)) {
+        if (this.checkLimit([y - 1, x - 1]) && this.checkEnemyFigure(gameData, x - 1, y - 1)  && !this.checkEmptyCell(gameData, x - 1, y - 1)) {
             possibleSteps.push([y - 1, x - 1]);
         }
         return possibleSteps;

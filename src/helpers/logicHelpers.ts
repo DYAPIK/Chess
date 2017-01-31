@@ -1,4 +1,4 @@
-import { IColorTypes, IActiveCell, ICell } from 'types/app';
+import { IColorTypes, ICell } from 'types/app';
 import  {
     Bishop,
     BlackPawn,
@@ -55,18 +55,19 @@ function createInitialChessData(): ICell[][] {
     return data;
 }
 
-function findActiveCell(data: ICell[][]): { x: number, y:number } | null {
-    let x,y;
+function findActiveCell(data: ICell[][]): ICell | null {
+    let x, y, id;
     data.forEach((line: ICell[], indexLine: number) => {
         line.forEach((cell: ICell, indexCell: number) => {
             if (cell.active) {
                 x = indexCell;
                 y = indexLine;
+                id = cell.id;
             }
         })
     });
-    if (x !== undefined && y !== undefined) {
-        return { x, y }
+    if (x !== undefined && y !== undefined && id !== undefined) {
+        return { x, y, id }
     }
     return null
 }
@@ -83,30 +84,47 @@ function findPossibleSteps(possibleSteps: number[][], searchStep: ICell): boolea
 
 type Figure = Bishop | BlackPawn | Horse | Officer | Queen | Rook | WhitePawn;
 
-function getFigureInstance (typesFigures: IColorTypes, cell: IActiveCell): Figure | null {
+function getFigureInstance (typesFigures: IColorTypes, cell: ICell): Figure | null {
     const { id, x, y } = cell;
     switch (id) {
 
+        /* WHITE FIGURES */
         case (typesFigures.white.pawn):
             return new WhitePawn(x, y, typesFigures.white.pawn);
 
-        case (typesFigures.black.pawn):
-            return new BlackPawn(x, y, typesFigures.white.pawn);
-
-        case (typesFigures.white.horse || typesFigures.black.horse):
+        case (typesFigures.white.horse):
             return new Horse(x, y, typesFigures.white.horse);
 
-        case (typesFigures.white.bishop || typesFigures.black.bishop):
+        case (typesFigures.white.bishop):
             return new Bishop(x, y, typesFigures.white.bishop);
 
-        case (typesFigures.white.rook || typesFigures.black.rook):
+        case (typesFigures.white.rook):
             return new Rook(x, y, typesFigures.white.rook);
 
-        case (typesFigures.white.officer || typesFigures.black.officer):
+        case (typesFigures.white.officer):
             return new Officer(x, y, typesFigures.white.officer);
 
-        case (typesFigures.white.queen || typesFigures.black.queen):
+        case (typesFigures.white.queen):
             return new Queen(x, y, typesFigures.white.queen);
+
+        /* BLACK FIGURES */
+        case (typesFigures.black.pawn):
+            return new BlackPawn(x, y, typesFigures.black.pawn);
+
+        case (typesFigures.black.horse):
+            return new Horse(x, y, typesFigures.black.horse);
+
+        case (typesFigures.black.bishop):
+            return new Bishop(x, y, typesFigures.black.bishop);
+
+        case (typesFigures.black.rook):
+            return new Rook(x, y, typesFigures.black.rook);
+
+        case (typesFigures.black.officer):
+            return new Officer(x, y, typesFigures.black.officer);
+
+        case (typesFigures.black.queen):
+            return new Queen(x, y, typesFigures.black.queen);
 
         default:
             return null;

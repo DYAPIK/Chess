@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import Cell from 'components/BoardComponents/Cell';
-import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app';
+import { IColorTypes, IQueue, ICell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 
@@ -12,7 +12,7 @@ interface IOwnProps {
     chooseCell: typeof actions.chooseCell;
     makeMove: typeof actions.makeMove;
     queueGame: IQueue;
-    activeCell: IActiveCell;
+    activeCell: ICell;
 }
 
 class LineCell extends React.Component<IOwnProps, {}> {

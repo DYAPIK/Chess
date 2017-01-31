@@ -4,13 +4,7 @@ interface IReduxState {
     boardData: ICell[][];
     typesFigures: IColorTypes;
     queueGame: IQueue;
-    activeCell: IActiveCell | null;
-}
-
-interface IActiveCell {
-    x: number;
-    y: number;
-    id: string;
+    activeCell: ICell | null;
 }
 
 interface ITypesFigures {
@@ -50,6 +44,5 @@ export {
     ITypesFigures,
     IColorTypes,
     IQueue,
-    IActiveCell,
     ICell,
 }

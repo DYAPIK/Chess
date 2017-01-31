@@ -1,4 +1,4 @@
-import { IAction, IQueue, IActiveCell, IReduxState, IColorTypes, ICell } from 'types/app';
+import { IAction, IQueue, IReduxState, IColorTypes, ICell } from 'types/app';
 import { findPossibleSteps, findActiveCell, getFigureInstance } from 'helpers/logicHelpers';
 import * as Redux from 'redux'
 import { ThunkAction } from 'redux-thunk';
@@ -12,7 +12,7 @@ interface IArgsChooseCellAction {
 }
 
 interface IArgsMakeMoveAction {
-    activeCell: IActiveCell;
+    activeCell: ICell;
     boardData: ICell[][];
     clickCellPosition: ICell;
     attack: boolean;

@@ -4,7 +4,7 @@ import * as Redux from 'redux'
 import * as block from 'bem-cn';
 import CellsField from 'components/BoardComponents/CellsField';
 import Frame from 'components/BoardComponents/Frame';
-import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app';
+import { IColorTypes, IQueue, ICell } from 'types/app';
 import actions from 'localRedux/actions';
 import './style.styl';
 
@@ -15,7 +15,7 @@ interface IStateProps {
     boardSize: number[];
     typesFigures: IColorTypes;
     queueGame: IQueue;
-    activeCell: IActiveCell;
+    activeCell: ICell;
 }
 
 interface IDispatchProps {

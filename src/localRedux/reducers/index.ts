@@ -7,7 +7,7 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
     const imState: Map<string, any> = fromJS(state);
     switch (action.type) {
     case ('CHESS:CHOOSE_CELL'): {
-        interface IData { x: number, y: number; id: string, activeCell: { x: number; y:number; } }
+        interface IData { x: number, y: number; id: string }
         const payload = action.payload as IData;
         return imState
             .setIn(['boardData', payload.y, payload.x, 'active'], true)
@@ -15,7 +15,7 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
             .toJS();
     }
     case ('CHESS:CHANGE_ACTIVE_CELL'): {
-        interface IData { x: number, y: number; id: string, activeCell: { x: number; y:number; } }
+        interface IData { x: number, y: number; id: string, activeCell: ICell }
         const { x, y, activeCell, id } = action.payload as IData;
         return imState
             .setIn(['boardData', y, x, 'active'], true)

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import './styles.styl';
-import { IColorTypes, IQueue, IActiveCell, ICell } from 'types/app'
+import { IColorTypes, IQueue, ICell } from 'types/app'
 import actions from 'localRedux/actions';
 
 interface IOwnProps {
@@ -11,7 +11,7 @@ interface IOwnProps {
     data: ICell
     typesFigures: IColorTypes;
     queueGame: IQueue;
-    activeCell: IActiveCell;
+    activeCell: ICell;
 }
 
 class Cell extends React.Component<IOwnProps, {}> {
@@ -81,7 +81,7 @@ class Cell extends React.Component<IOwnProps, {}> {
             const args = { x, y, id, queueGame, boardData };
             chooseCell(args);
             // cell have figure, condition if this cell has enemy figure
-            if (activeCell && (activeCell.x !== x || activeCell.y !== y)) {
+            if (activeCell && (activeCell.x !== x || activeCell.y !== y) && activeCell.id[0] !== id[0]) {
                 const args = { typesFigures, activeCell, boardData, clickCellPosition: { x, y, id }, attack: true };
                 makeMove(args);
             }
